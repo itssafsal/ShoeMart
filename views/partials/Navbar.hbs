@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+<header>
+     <nav class="navbar navbar-expand-lg navbar bg-white p-3 fixed-top">
+  <div class="container-fluid " >
+    <a class="navbar-brand fw-bold text-black ms-3" style="font-family:Georgia, 'Times New Roman', Times, serif" href="/"><img style="height: 30px;" src="/images/modern-designer-mens-sneaker-logo-vector-45184985.jpg" alt=""><span style="color: red;">SHOE</span> MART</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4 fs-5" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+         <li class="nav-item">
+          <a class="nav-link fw-bold navs me-2" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class=" nav-link fw-bold navs me-2" aria-current="page" href="/">Shop</a>
+        </li>
+         <li class="nav-item">
+          <a class=" nav-link fw-bold navs" aria-current="page" href="/">Latest</a>
+        </li>
+        {{#if user}}
+        <li class="nav-item">
+          <a class=" nav-link fw-bold navs" href="/orders">Orders</a>
+        </li>
+        {{/if}}
+      </ul>
+  <div class="d-flex input-group me-5" style="width: 400px;">
+    
+    <div>
+      <form action="/search" method="post">
+    <input type="search" id="menuSearchBar" name="search" class="form-control" placeholder="Search..." aria-label="Search" style="width: 300px; box-shadow: 0px 5px rgba(0,0,0,.2);" />
+    </div>
+  <button type="submit" class="btn text-white" style="border-radius: 0 15px 15px 0;background-color: red;box-shadow: 0px 5px rgba(0,0,0,.2)">
+    <i class="bi bi-search "></i>
+     Search 
+  </button>
+  </form>
+</div>
+ {{!-- <div class="d-flex input-group" role="search">
+  <div>
+        <input class="form-control " type="search" placeholder="Search">
+  </div>     
+        <button class="btn btn-primary" type="button">Search</button>
+      </div> --}}
+     <div class="dropdown">
+  <button class=" btn fw-bold dropdown navs" style="left: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {{#if user}}
+    <i class="bi bi-person h4"></i>
+    {{else}}
+    <i class="bi bi-person h4"></i>
+    {{/if}}
+  </button>
+  <ul class="dropdown-menu  bg-white">
+    {{#if user}}
+    <li><a class="dropdown-item fw-bold navs bg-white" href="/profile">Profile</a></li>
+    <li><a class="dropdown-item fw-bold navs bg-white" href="/logout">Logout</a></li>
+    {{else}}
+    <li><a class="dropdown-item fw-bold navs bg-white" href="/login">Login</a></li>
+    {{/if}}
+ 
+  </ul>
+</div>
+<div >
+ <a class=" fw-bold ms-4 me-2" style="position: relative" href="/cart"><i class="bi bi-bag-dash h5 navs"></i>
+ {{#if cartCount}}
+ <span class="badge bg-danger" id="count">{{cartCount}}</span>
+ {{/if}}
+          </a>
+</div>
+<div class="pt-1">
+  <a   class="wish-icon fw-bold ms-4 me-2" style="position: relative;" href="/wishlist"><i class="bi bi-heart h5 navs"></i>
+  {{#if wishlistCount}}
+  <span class="badge bg-danger" id="wishlistcount">{{wishlistCount}}</span>
+  {{/if}}
+          </a>
+ </div>         
+    </div>
+  </div>
+</nav>
+</header>

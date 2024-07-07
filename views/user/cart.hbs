@@ -1,0 +1,134 @@
+
+{{> Navbar}}
+{{#if cart}}
+<section id="cart">
+<div class="card">
+            <div class="cartrow row">
+                <div class="col-md-8 cart">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                            <div class="col align-self-center text-right text-muted">{{cartCount}} items</div>
+                        </div>
+                    </div>  
+                    {{#each products}}
+                    <div class="row border-top border-bottom">
+                        <div class="row main align-items-center">
+                            <div class="col-2"><img class="cartimg img-fluid" src="/product-images/{{this.product._id}}0.jpg"></div>
+                            <div class="col">
+                                <div class="row text-muted">{{this.product.Category}}</div>
+                                <div class="row">{{this.product.Name}}</div>
+                            </div>
+                            <div class="col">                               
+                                <a class="cartlink cart-a me-1" onclick="changeQuantity('{{this._id}}','{{this.item}}','-1','{{../user._id}}','{{this.quantity}}')" id="btn">-</a><span id="{{this.item}}">{{this.quantity}}</span><a class="cartlink cart-a ms-1" onclick="changeQuantity('{{this._id}}','{{this.item}}','1','{{../user._id}}')" id="btn">+</a>                            
+                            </div>
+                            <div class="col">&#8377; {{this.product.Price}}</div>
+
+                          
+                            <a class="col text-black" style="text-decoration: none;cursor: pointer;" onclick="remove('{{this._id}}','{{this.item}}')" >&#10005;</a>
+                        </div>
+                    </div>
+                   
+                    {{/each}}
+                    <div class="back-to-shop"><a class="text-black cart-a" href="/">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                </div>
+                <div class="col-md-4 summary">
+                    <div><h5 class="carth5 pb-5 pt-4"><b>Summary</b></h5></div>
+                 
+                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                        <div class="col">TOTAL PRICE</div>
+                        <div class="col text-right">&#8377; <span id="total">{{total}}</span></div>
+                    </div>
+                    <a href="/place-order" class="cartbtn btn">CHECKOUT</a>
+                </div>
+            </div>
+            
+        </div>
+        </section>
+    {{else}}
+    <section id="cart">
+<div class="card">
+    
+            <div class="cartrow row cart">
+                
+                    <div class="title">
+                        <div class="row">
+                            <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                        </div>
+                    </div>  
+                    
+                    <h2 class="text-center">Cart is empty!</h2>
+                   
+                    <div class="back-to-shop"><a class="text-black cart-a" href="/">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                
+             
+            </div>
+            
+        </div>
+        </section>
+
+    {{> footer}}
+
+    {{/if}}       
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function remove(cartIds,productIds){
+            console.log(productIds)
+            Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+      window.location.href="/remove-cart-product?cartId="+cartIds+"&productId="+productIds
+  }
+});
+    }
+    </script>
+
+<script>
+    function changeQuantity(cartId,productId,count,userId){
+        let quantity=parseInt(document.getElementById(productId).innerHTML)
+        count=parseInt(count)
+          $.ajax({
+            url:'/change-product-quantity',
+            data:{
+                cart:cartId,
+                product:productId,
+                count:count,
+                quantity:quantity,
+                userId:userId
+            },
+            method:'post',
+            success:function(response){
+                if(response.removeProduct){
+            Swal.fire({
+            text: "Product removed from cart",
+            width:"350px",
+            icon: "success",
+          }).then(()=>{
+            location.reload()
+          })}
+                else if(response.limitExceed){
+                    Swal.fire({
+                    title:'Stock Limit Exceed',
+                    text: "The quantity exceeds the available stock limit for this product.",
+                    width:"450px",
+                    icon: "warning", 
+                })
+                }
+                else{
+                    document.getElementById(productId).innerHTML=quantity+count
+                    document.getElementById('total').innerHTML=response.total
+                }
+            }
+        })
+      
+    }
+</script>

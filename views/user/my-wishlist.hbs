@@ -1,0 +1,74 @@
+{{> Navbar}}
+<section >
+<div class="cart-wrap">
+	<div class="main-heading pb-1 text-center">Wishlist</div>
+		<div class="container wislists">
+	        <div class="row">
+			    <div class="col-md-12">
+			        
+			        <div class="table-wishlist">
+				        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+				        	<thead>
+					        	<tr>
+					        		<th width="45%">Product Name</th>
+					        		<th width="15%">Unit Price</th>
+					        		<th width="15%">Stock Status</th>
+					        	
+					        	</tr>
+					        </thead>
+					        <tbody>
+								{{#each products}}
+								{{#each productDetails}}
+					        	<tr>
+					        		<td width="45%">
+					        			<div class="disply-flex align-centr">
+		                                    <div class="img-product">
+		                                        <img src="/product-images/{{this._id}}0.jpg" alt="" class="mCS_img_loaded">
+		                                    </div>
+		                                    <div class="name-product">
+		                                        {{this.Name}}
+		                                    </div>
+	                                    </div>
+	                                </td>
+					        		<td width="15%" class="price">&#8377; {{this.Price}}</td>
+					        		<td width="15%"><span class="in-stock-box">In Stock</span></td>
+					        		<td width="15%"><a class="round-black-btn small-btn" onclick="addToCart('{{this._id}}')">Move to Cart</a></td>
+									{{/each}}
+					        		<td width="10%" class="text-center " style="font-size: 3vw; cursor: pointer;"><a class="text-black" style="text-decoration: none;" onclick="removewishlist('{{this.item}}','{{this._id}}')">&times;</a></td>
+					        	</tr>
+					        	
+					        	{{/each}}
+				        	</tbody>
+				        </table>
+				    </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{{> footer}}
+
+<script>
+
+	function removewishlist(productId,wishlistId){
+		console.log(productId)
+		console.log(wishlistId)
+		   Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+      window.location.href="/remove-wishlist-product?productId="+productId+"&wishlistId="+wishlistId
+  }
+});
+
+	}
+
+</script>
+	

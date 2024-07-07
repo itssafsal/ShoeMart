@@ -1,0 +1,165 @@
+<style>
+    .container {
+        margin-bottom: 5%;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+    }
+
+    .cart-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 14px 16px rgba(232, 225, 225, 0.1);
+        /* width: 400px; */
+        /* background-color: #c7c7c7;; */
+    }
+
+    .card-body {
+        padding: 40px;
+    }
+
+    .card-body {
+        background-color: #ffffff;
+        /* Set the background color */
+        border-radius: 10px;
+        border: 2px solid;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* Add the box shadow */
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        color: address, daily body, black wall, shadow, danger, Nakoda#007bff;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-label span {
+        color: red;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        color: black;
+        margin-bottom: 15px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .text-danger {
+        font-size: 14px;
+        font-style: italic;
+        color: red;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        background-color: #19b22d;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background-color: #0f8415;
+    }
+</style>
+
+
+
+<!-- Cart Area -->
+<div class="container">
+    <div class="cart-container">
+        <div class="card mt-5">
+            <div class="card-body">
+                <h3 class="card-title">Edit Your Address</h3>
+
+                <form action="/edite-address" id="addressForm" method="POST">
+
+
+                    {{!-- <div class="form-group">
+                        <label for="fullname" class="form-label">Full Name <span>*</span></label>
+                        <input type="text" id="fullname" name="name" class="form-control" required >
+                        <span id="fullnameError" class="text-danger"></span>
+                    </div> --}}
+
+                    <div class="row">
+                         <div class="col-md-6 mb-3">
+                            <label for="state" class="form-label">Save as <span>*</span></label>
+                            <select id="state" name="Save_as" class="form-control" required>
+                              <option value="Home">Home</option>
+                            <option value="WorkSpace">Work Space</option>
+                            <option value="WorkSpace">Other</option>
+                            </select>
+                            <span id="stateError" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Name </label>
+                            <input type="text" id="email" name="Name" class="form-control"required value="{{addressData.Name}}">
+                            <span id="emailError" class="text-danger"></span>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                         <div class="col-md-6 mb-3">
+                            <label for="adname" class="form-label">House Name  <span>*</span></label>
+                            <input type="text" id="adname" name="House_Name" class="form-control"required value="{{addressData.House_Name}}">
+                            <span id="adnameError" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="street" class="form-label">Street <span>*</span></label>
+                            <input type="text" id="street" name="Street" class="form-control"required value="{{addressData.Street}}">
+                            <span id="streetError" class="text-danger"></span>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                         <div class="col-md-6 mb-3">
+                            <label for="pincode" class="form-label">City <span>*</span></label>
+                            <input type="text" id="pincode" name="City" class="form-control"required value="{{addressData.City}}">
+                            <span id="pincodeError" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="city" class="form-label">State <span>*</span></label>
+                            <input type="text" id="city" name="State" class="form-control" required value="{{addressData.State}}">
+                            <span id="cityError" class="text-danger"></span>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city" class="form-label">pin Code <span>*</span></label>
+                            <input type="text" id="city" name="Pin_Code" class="form-control" required value="{{addressData.Pin_Code}}">
+                            <span id="cityError" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="mobile" class="form-label">Phone Number <span>*</span></label>
+                            <input type="text" id="mobile" name="Mobile" class="form-control" required value="{{addressData.Mobile}}">
+                            <span id="mobileError" class="text-danger"></span>
+                        </div>
+                        <input type="text" name="id" value="{{id}}" hidden>
+                    </div>
+                   
+                    <div class="form-group text-center">
+                        <button id="saveChangesButton" class="btn btn-primary" type="submit">Conform Address</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

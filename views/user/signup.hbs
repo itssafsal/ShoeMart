@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<div class="row">
+   
+    <div id="login">
+<div class="wrapper mt-5 mb-5" style="width: 370px;">
+  <form action="/signup" method="post">
+    <h2>Signup</h2>
+    <div class="input-box">
+      <input type="text" name="fname" placeholder="First Name" required>
+       {{#if validationErr.name}}
+    <p class="text-danger" >Name shoul be Minimum 4 letters</p> 
+    {{/if}}
+    </div>
+   
+    <div class="input-box">
+      <input type="text" name="lname" placeholder="Last Name" required> 
+    </div>
+
+    <div class="input-box">
+      <input type="email" name="email" placeholder="Email Address" required> 
+    </div>
+
+    <div class="input-box">
+      <input type="tel" name="mobile" placeholder="Phone Number" required> 
+      {{#if validationErr.mobile}}
+    <p class="text-danger" >Enter a valid number</p> 
+    {{/if}}
+    </div>
+
+    <div class="input-box">
+      <input type="password" name="password" placeholder="Password" required>
+      <i class='bx bxs-lock-alt'></i>
+       {{#if validationErr.password}}
+    <p class="text-danger" >password Minimum 6 letters</p> 
+    {{/if}}
+    </div>
+
+    
+    {{#if signupErr}}
+      <p class="text-danger">{{signupErr}}</p>
+      {{/if}} 
+
+    <button class="login-btn" type="submit" >Submit</button>
+    <div class="register-link">
+      <p>Already have an account?
+        <a href="/login">Login</a></p>
+    </div>
+  </form>
+</div>
+</div>
+</div>

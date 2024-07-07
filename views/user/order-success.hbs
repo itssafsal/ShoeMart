@@ -1,0 +1,83 @@
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .order-details {
+            margin-top: 20px;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .order-details h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .order-details p {
+            margin: 10px 0;
+            color: #666;
+        }
+        .order-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .order-details ul p {
+            margin: 5px 0;
+        }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn {
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Order Confirmation</h1>
+        <div class="order-details">
+            <h2>Your Order</h2>
+            <p>Thank you for your order! Here are the details:</p>
+            <ul>
+                <p>OrderID : {{orderData.orderId}}</p>
+                <p>Products Count : {{productqty}}</p>
+                {{!-- <p>Total Discount : <%= data.discount  %></p> --}}
+                <p>Total Amount : {{orderData.totalAmount}}</p>
+                <p>Payment method : {{orderData.payment-method}}</p>
+                <p>Date : {{orderData.date}}</p>
+            </ul>
+            <p>Your order will be shipped soon.</p>
+        </div>
+        <div class="btn-container">
+            <a href="/" class="btn">Continue Shopping</a>
+            <a href="/orders" class="btn">My Orders</a>
+            
+        </div>
+    </div>
+
+{{!-- {{> footer}} --}}

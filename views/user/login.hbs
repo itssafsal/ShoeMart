@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<div class="row">
+  
+   
+<div id="login">
+ <div class="wrapper">
+  <form action="/login" method="post">
+    <h2>Login</h2>
+    <div class="input-box">
+      <input type="email" name="email" placeholder="Email Address" required> 
+      <i class='bx bxs-user'></i>
+    </div>
+    <div class="input-box">
+      <input type="password" name="password" placeholder="Password" required>
+      <i class='bx bxs-lock-alt'></i>
+    </div>
+    {{#if loginErr}}
+    <p class="text-danger">{{loginErr}}</p>
+    {{/if}}
+    <button class="login-btn" type="submit" >Login</button>
+    <div class="register-link">
+      <p>Don't have an account?
+        <a href="/signup"> Sign Up</a></p>
+    </div>
+  </form>
+</div>
+</div>
+</div>

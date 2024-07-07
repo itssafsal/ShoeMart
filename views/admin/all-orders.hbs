@@ -1,0 +1,128 @@
+
+<div class="d-flex align-items-stretch">
+      <!-- Sidebar Navigation-->
+      <nav id="sidebar">
+        <!-- Sidebar Header-->
+        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle" src="/img/avatar-6.jpg" alt="...">
+          <div class="ms-3 title">
+            <h1 class="h5 mb-1">{{admins.name}}</h1>
+             {{#if admins.superadmin}}
+            <p class="text-sm text-gray-700 mb-0 lh-1">Super Admin</p>
+            {{else}}
+            <p class="text-sm text-gray-700 mb-0 lh-1">Local Admin</p>
+            {{/if}}
+          </div>
+        </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+        <ul class="list-unstyled">
+              <li class="sidebar-item "><a class="sidebar-link" href="/admin"> 
+                      <svg class=" svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#real-estate-1"> </use>
+                      </svg>
+                      <span >Home </span></a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="/admin/all-users"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#portfolio-grid-1"> </use>
+                      </svg><span>User Manage </span></a></li>
+              <li class="sidebar-item"><a class="sidebar-link" href="/admin/view-products"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#sales-up-1"> </use>
+                      </svg><span>Product Manage </span></a></li>
+              <li class="sidebar-item active"><a class="sidebar-link" href="#orderDropdown" data-bs-toggle="collapse"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                       <use xlink:href="#survey-1"> </use>
+                      </svg><span>Order Manage </span></a>
+                <ul class="collapse list-unstyled " id="orderDropdown">
+                  <li><a class="sidebar-link" href="/admin/delivered-orders">Deliverd Orders</a></li>
+                </ul>
+              </li>
+             
+               {{#if admins.superadmin}}
+              <li class="sidebar-item"><a class="sidebar-link" href="/admin/all-admin"> 
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#disable-1"> </use>
+                      </svg><span>Admin Manage</span></a></li>
+                {{/if}} 
+        </ul>
+      
+      </nav>
+      <div class="page-content form-page">
+            <!-- Page Header-->
+            <div class="bg-dash-dark-2 py-4">
+              <div class="container-fluid">
+                <h2 class="h5 mb-0">Order Manage</h2>
+              </div>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="container-fluid py-2">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 py-3 px-0">
+                  <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Order Manage</li>
+                </ol>
+              </nav>
+            </div>
+        <section class="tables py-0">
+          <div class="container-fluid">
+            <div class="row gy-4">
+             
+              <div class="">
+                <div class="card mb-0">
+                  <div class="card-header">
+                    <h3 class="h4 mb-0 text-secondary">User Management</h3>
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="table-responsive">
+                      <table class="table mb-0 table-striped table-hover ">
+                        <thead>
+                          <tr>
+                            <th class="text-secondary">Sl No</th>
+                            <th class="text-secondary">Order Id</th>
+                            <th class="text-secondary">User Name</th>
+                            <th class="text-secondary">Payment Method</th>
+                            <th class="text-secondary">Order Date</th>
+                            <th class="text-secondary">Status</th>
+                            <th class="text-secondary">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {{#each placedOrders}}
+                          <tr>
+                            <th class="text-secondary" scope="row">{{math @index "+" 1}}</th>
+                            <td class="text-secondary">{{this.orderId}}</td>
+                            <td class="text-secondary">{{this.deliveryDetails.name}}</td>
+                            <td class="text-secondary">{{this.payment-method}}</td>
+                            <td class="text-secondary">{{this.date}}</td>
+                            <td class="">
+                              <select onchange="location.href='/admin/change-order-status?id={{this._id}}&value='+value" class="text-secondary form-control" style="background-color: #2b2e31;" name="" id="">
+                              <option value="{{this.status}}">{{this.status}}</option>
+                              {{#unless shipped}}
+                              <option value="Shipped">Shipped</option>
+                              {{/unless}}
+                              <option value="Delivered">Delivered</option>
+                            </select>
+                              </td>
+                            <td class="text-secondary"><a href="/admin/order-details?orderId={{this._id}}" class="btn btn-outline-danger">Details</a></td>
+                          </tr>
+                          {{/each}}
+                         
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+        </section>
+        <!-- Page Footer-->
+        <footer class="position-absolute bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer">
+          <div class="container-fluid text-center">
+            <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            <p class="mb-0 text-dash-gray">2021 &copy; Your company. Design by <a href="https://bootstrapious.com">Bootstrapious</a>.</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+  

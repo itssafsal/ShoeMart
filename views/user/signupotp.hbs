@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<div class="row">
+   
+    <div id="login">
+<div class="wrapper mt-5 mb-5" style="width: 370px;">
+  <form action="/signupotp" method="post">
+    <h2>OTP</h2>
+
+    <div class="input-box">
+      <input type="tel" name="otp" placeholder="Enter Otp" required> 
+    </div>
+    {{#if otpErr}}
+      <p class="text-danger">{{otpErr}}</p>
+      {{/if}} 
+
+    <button class="login-btn" type="submit" >Submit</button>
+    <div class="register-link">
+        <p id="countdown"> </p>
+        <button id="resendButton" onclick="location.href='/resetotp'" class="btn btn-primary-lg" style="color: black; " disabled  >Resend OTP</button>
+
+
+    </div>
+  </form>
+</div>
+</div>
+</div>
+
+<script>
+    let countdownValue = 120; // Countdown duration in seconds
+			let countdownInterval;
+	
+			function startCountdown() {
+				countdownInterval = setInterval(function () {
+					if (countdownValue > 0) {
+						countdownValue--;
+						document.getElementById('countdown').innerText = `Resend OTP in ${countdownValue} seconds`;
+					} else {
+						clearInterval(countdownInterval);
+						document.getElementById('countdown').innerText = 'Waiting for OTP...';
+						document.getElementById('resendButton').disabled = false;
+					}
+				}, 1000);
+			}
+
+            startCountdown()
+
+           
+</script>

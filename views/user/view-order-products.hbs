@@ -1,0 +1,28 @@
+<section>
+    <div class="container">
+        <div class="row">
+             <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Title</th>  
+                        <th>Price</th>
+                        <th>Quatntity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {{#each product}}
+                    <tr>
+                        <td><img src="/product-images/{{this.product._id}}.jpg" style="width: 70px;height: 70px" alt=""></td>
+                        <td>{{this.product.Name}}</td>
+                        <td>{{this.product.Price}}</td>
+                        <td>{{this.quantity}}</td>
+                    </tr>
+                        {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{{> footer}}

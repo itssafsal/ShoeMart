@@ -1,0 +1,70 @@
+{{> user-header}}
+ 
+<section class=" pb-5">
+  <div id="carouselExampleSlidesOnly" class="carousel slide"data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active text-white" style="font-weight: 500; font-size: 8vw; line-height: 30vw;text-align: center; height: 40vw;text-shadow:5px 10px grey ; background-image: url('/images/banner\ background.jpg');background-repeat: no-repeat;background-size: cover;background-position: center;">
+      {{category}} COLLECTIONS
+      {{!-- <img src="/images/Banner 1.jpg" class="d-block w-100" style="max-height: 500px;" alt="..."> --}}
+    </div>
+   
+  </div>
+</div>
+</section>
+<section class="pb-5 mb-5" id="products">
+  <a href="#carouselExampleSlidesOnly" class="bi bi-arrow-up-square-fill h1" id="scrlup-btn"></a>
+  <h1 class="text-center mt-5 pt-5  fw-bold text-black" style="font-size: 3rem;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" >Newest Arrival</h1>
+  <p class="text-center pb-5" >Discover the Latest in Shoe Elegance: New Arrivals!</p>
+    <div class="container">
+      <a class="me-3 pricefilter" href="/newarrival">Newest Arrivals</a>    
+    <a class="me-3 pricefilter" href="/category-pricefilter?price=-1&category={{category}}">Price High to Low</a>
+    <a class="pricefilter" href="/category-pricefilter?price=1&category={{category}}">Price Low to High</a>
+    <div class="row mt-5">
+        {{#each products}}
+        <div class="col-md-6 col-lg-4 ">
+            <div class="prod-card text-center text-black" style=" height: 24rem;width: 100%;">
+            
+              <div style="position: relative;">
+                 <i class="bi bi-heart h3 wishicon" style="cursor:pointer;" onclick="addToWishlist('{{this._id}}')"></i>
+               <a href="/product-details?productId={{this._id}}">
+               <img src="/product-images/{{this._id}}0.jpg" class="card-img-top mx-auto" alt="..." style="height: 15rem;width: 80%">
+               </a>
+              </div>
+               <div class="cart-btn" onclick="addToCart('{{this._id}}')"><p style="padding-top: 10px;" >Add to Cart</p></div>
+  <div class="card-body mt-2">
+    <h5 class="card-title">{{this.Name}}</h5>
+    <br>
+    <h6 class="card-title">RS {{this.Price}}/-</h6>
+    {{!-- <p class="card-text">{{this.Description}}</p> --}}
+    <br>
+   
+  </div>
+</div>
+        </div>
+        {{/each}}
+    </div>
+    </div>
+</section>
+<section class="container pb-5">
+  <div class="row" style="width: vh%;background-color: red;">
+    <div class="col-lg-4 p-5 text-white">
+      <i class="bi bi-box h1 "></i>
+       <h5 class="mt-3">Free Shipping Method</h5>
+      <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+      </div>
+    <div class="col-lg-4 p-5 text-white">
+      <i class="bi bi-shield-lock h1"></i>
+      <h5 class="mt-3">Secure Payment System</h5>
+      <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+    </div>
+    <div class="col-lg-4 p-5 text-white">
+      <i class="bi bi-arrow-repeat h1"></i>
+      <h5 class="mt-3">Secure Payment System</h5>
+      <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+      </div>
+  </div>
+</section>
+<section class="wish-cart">
+    
+</section>
+{{> footer}}

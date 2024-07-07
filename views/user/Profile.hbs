@@ -1,0 +1,415 @@
+<style>
+  .profilelink-btn{
+    color: red;
+  }
+  .profilelink-btn:hover{
+    transition: .5s;
+    color: #212529;
+  }
+</style>
+
+{{> Navbar}}
+<section>
+    <div class="container py-4">
+    
+      <div class="row mt-5 pt-5" style="background: rgb(226, 226, 226);">
+        <div class="col-lg-4 ">
+          <div class="mt- me-0 pb-5">
+            <div class="card-body text-center pb-5">
+              <img src="https://cdn.vectorstock.com/i/500p/53/42/user-member-avatar-face-profile-icon-vector-22965342.jpg" alt="avatar"
+                class="rounded-circle img-fluid m-0" style="width: 150px;">
+              <h5 class="mt-4 mb-0">{{userData.fname}} {{userData.lname}}</h5>
+            </div>
+            <hr>
+
+            
+
+            <div class="pt-2">
+              <ul class="ps-0 rounded-3 fw-bold">
+                <li class="list-group-item justify-content-between align-items-center p-3">
+                  <a href="/cart" class="mb-0 profilelink-btn" style="text-decoration: none;">My Cart</a>
+                </li>
+                <li class="list-group-item justify-content-between align-items-center p-3">
+                  <a href="/wishlist" class="mb-0 profilelink-btn" style="text-decoration: none;">My Favorites</a>
+                </li>
+                <li class="list-group-item  justify-content-between align-items-center p-3">
+                   <a href="/orders" class="mb-0 profilelink-btn" style="text-decoration: none;">My Orders</a>
+                </li>
+                <li class="list-group-item  justify-content-between align-items-center p-3">
+                  <a onclick="editProfilefrm()" class="mb-0 profilelink-btn" style="text-decoration: none; cursor: pointer;">Edit My Details</a>
+                </li>
+                 <li class="list-group-item  justify-content-between align-items-center p-3">
+                   <a onclick="changepassword()" class="mb-0 profilelink-btn" style="text-decoration: none;cursor: pointer;">Change Password</a>
+                </li>
+                <li class="list-group-item  justify-content-between align-items-center p-3">
+                   <a href="/logout" class="mb-0 profilelink-btn" style="text-decoration: none;">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 ps-4 pb-5">
+          <div class=" mb-0 ms-0 ">
+            <div class="card-body pb-0">
+              <div>
+                    <h4>User Details</h4>
+                </div>
+              <div class="row mt-4">
+                <div class="col-sm-3">
+                  <p class="mb-0">First Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{userData.fname}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Last Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{userData.lname}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{userData.email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row pb-0">
+                <div class="col-sm-3">
+                  <p class="mb-0">Mobile</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted ">{{userData.mobile}}</p>
+                </div>
+              </div>
+              <hr>
+            </div>
+          <div class="row pt-0">
+            {{#each addressData.address}}
+            <div class="col-md-6">
+              <div class=" mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="fs-5 fw-bold me-1">Address {{math @index '+' 1}}</span>
+                  </p>
+                  
+                  <p class="mb-0" style="font-size: 1rem;">Save As: {{this.Save_as}}</p>
+                  <p class="mt-3" style="font-size: 1rem;">House Name: {{this.House_Name}}</p>
+                  <p class="mt-3 mb-1" style="font-size: 1rem;">Street: {{this.Street}}</p>
+                  <p class="mt-3 mb-1" style="font-size: 1rem;">City: {{this.City}}</p>
+                  <p class="mt-3 mb-1" style="font-size: 1rem;">State: {{this.State}}</p>
+                  <p class="mt-3 mb-4" style="font-size: 1rem;">Pincode: {{this.Pin_Code}}</p>
+                   <a class="profile-btn me-2" href="/delete-address?id={{@index}}">Delete Address</a>
+                  <a style="cursor: pointer;" class="profile-btn" onclick="editadrsfrm('{{@index}}')">Edit Address</a>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+            
+            <div class="mt-5">
+            <a class="profile-btn" onclick="adrsfrm()" style="cursor: pointer;">Create new Address</a>
+            </div>
+
+              {{!-- eidt address form --}}
+
+              <div id="editAddress" class="adrsmodal">
+  						<span class="close" onclick="closeeditadrsfrm()">&times;</span>
+  						 <div class="cart-wrap  container adrs-content" id="adrs-frm">
+                  <div class="pb-2 ms-4 fs-3 ">Edit Address</div>
+                      <form class="mx-3" action="/edit-address" method="post">
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">Save As</label>
+                            <select id="state" name="Save_as" class="form-control" required>
+                            <option value=""  >Choose One</option>
+                            <option value="Home">Home</option>
+                            <option value="WorkSpace">Work Space</option>
+                            <option value="WorkSpace">Other</option>
+                            </select>                  
+                      </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">Full Name</label>
+                    <input type="text" name="Name" value=""  id="editname" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">House Name</label>
+                    <input type="text" name="House_Name" value=""  id="edithousename" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">Street</label>
+                    <input type="text" name="Street" value=""  id="editstreet" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">City</label>
+                    <input type="text" name="City" value=""  id="editcity" class="form-control" />
+                  </div>
+                </div>
+                 <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">State</label>
+                    <input type="text" name="State" value=""  id="editstate" class="form-control" />
+                  </div>
+                </div>
+                 <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">Pin Code</label>
+                    <input type="text" name="Pin_Code" value="" id="editpincode" class="form-control" />
+                  </div>
+                </div>
+                 <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                     <label for="" class="form-label">Mobile</label>
+                    <input type="text" name="Mobile" value="" id="editmobile" class="form-control" />
+                  </div>
+                </div>
+              </div>
+                          <input type="text" name="id" id="editid" value="" hidden> 
+                          <br>
+                          <button type="submit" class="btn adrs-btn">Submit</button>
+                      </form>
+                </div>
+             </div>
+
+             {{!-- edit Profile form --}}
+
+             <div id="editProfile" class="adrsmodal">
+  						<span class="close" onclick="closeeditProfilefrm()">&times;</span>
+  						 <div class="cart-wrap  container profile-content" id="adrs-frm">
+                  <div class="pb-2 ms-4 fs-3 ">Edit My Details</div>
+                      <form class="mx-3" action="/edit-userdetails" method="post">
+              <div class="row">
+                <div class=" mb-1">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">First Name</label>
+                    <input type="text" value="{{userData.fname}}" name="fname"  id="form3Example1n" class="form-control" required oninvalid="this.setCustomValidity('First Name Should be 4 letter')"/>
+                    <p>First Name Should be minimum 4 letters</p>
+                  </div>
+                </div>
+                
+                <div class=" mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Last Name</label>
+                    <input type="text" value="{{userData.lname}}" name="lname" id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+                
+                 <div class=" mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Email</label>
+                    <input type="email" value="{{userData.email}}" name="email" id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+                
+                 <div class=" mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Mobile</label>
+                    <input type="text" value="{{userData.mobile}}" name="mobile"  id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+              </div>
+                          <br>
+                          <button type="submit" class="btn adrs-btn">Submit</button>
+                      </form>
+                </div>
+             </div> 
+
+             {{!-- change password --}}
+
+              <div id="changepswrd" class="adrsmodal mt-5">
+  						<span class="close" onclick="closechangepswrd()">&times;</span>
+  						 <div class="cart-wrap  container profile-content" id="adrs-frm">
+                  <div class="pb-2 ms-4 fs-3 ">Change Password</div>
+                      <form class="mx-3" action="" id="changepasword" method="post">
+              <div class="row">
+                <div class=" mb-1">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Current Password</label>
+                    <input type="text" name="currentpaasword"  id="form3Example1n" class="form-control" required/>
+                    <p style="display: none; color: red;" id="pswrderror" >Incorrect current Password</p>
+                  </div>
+                </div>
+                
+                <div class=" mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">New Password</label>
+                    <input type="text" name="newpassword"  id="form3Example1n" class="form-control" required/>
+                    <p style="display: none; color: red;" id="pswrdvalidation" >Password minimum 6 letters</p>
+                  </div>
+                </div>
+              </div>
+                          <br>
+                          <button type="submit" class="btn adrs-btn">Submit</button>
+                      </form>
+                </div>
+             </div> 
+                 
+            <div id="AddressModal" class="adrsmodal">
+  						<span class="close" onclick="closeadrsfrm()">&times;</span>
+  						 <div class="cart-wrap  container adrs-content" id="adrs-frm">
+                  <div class="pb-2 ms-4 fs-3 ">Address Form</div>
+                      <form class="mx-3" action="/address" method="post" enctype="multipart/form-data">
+                        
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Save AS</label>
+                            <select id="form3Example1n" name="Save_as" class="form-control" required>
+                            <option value=""  >Choose One</option>
+                            <option value="Home">Home</option>
+                            <option value="WorkSpace">Work Space</option>
+                            <option value="WorkSpace">Other</option>
+                            </select>                 
+                       </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Full Name</label>
+                    <input type="text" name="Name" id="form3Example1n" class="form-control" required />
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">House Name</label>
+                    <input type="text" name="House_Name" id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Street</label>
+                    <input type="text" name="Street" id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">City</label>
+                    <input type="text" name="City"  id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+                 <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">State</label>
+                    <input type="text" name="State" id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+                 <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Pin Code</label>
+                    <input type="text" name="Pin_Code"  id="form3Example1n" class="form-control" required />
+                  </div>
+                </div>
+                 <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label for="" class="form-label">Mobile</label>
+                    <input type="text" name="Mobile"  id="form3Example1n" class="form-control" required/>
+                  </div>
+                </div>
+              </div>
+                          <br>
+                          <button type="submit" class="btn adrs-btn">Submit</button>
+                      </form>
+                </div>
+						</div>
+                {{!-- </div> --}}
+              {{!-- </div> --}}
+            {{!-- </div> --}}
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{> footer}}
+
+ <script>
+
+function adrsfrm(){
+  document.getElementById('AddressModal').style.display="block";
+}
+function closeadrsfrm(){
+document.getElementById('AddressModal').style.display="none";
+}
+
+function editProfilefrm(){
+  document.getElementById('editProfile').style.display="block";
+}
+function closeeditProfilefrm(){
+document.getElementById('editProfile').style.display="none";
+}
+function changepassword(){
+  document.getElementById('changepswrd').style.display='block'
+}
+function closechangepswrd(){
+  document.getElementById('changepswrd').style.display='none'
+}
+
+function editadrsfrm(id){
+  fetch('/edit-address?id='+id)
+  .then(response=>response.json())
+  .then(data=>{
+    console.log(data)
+  document.getElementById('editname').value=data.Name
+  document.getElementById('edithousename').value=data.House_Name
+  document.getElementById('editstreet').value=data.Street
+  document.getElementById('editcity').value=data.City
+  document.getElementById('editstate').value=data.State
+  document.getElementById('editpincode').value=data.Pin_Code
+  document.getElementById('editmobile').value=data.Mobile
+  document.getElementById('editid').value=data.id
+  })
+  document.getElementById('editAddress').style.display="block"
+}
+function closeeditadrsfrm(){
+  document.getElementById('editAddress').style.display="none"
+}
+
+$('#changepasword').submit(function(e){
+  e.preventDefault()
+  $.ajax({
+    url:'/changepasword',
+    data:$('#changepasword').serialize(),
+    method:'post',
+    success:function(response){
+      if(response.status){
+          Swal.fire({
+            // title: "Product Addes",
+            width:"350px",
+            text: "Password changed successfully!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          }).then(function(){
+            location.href=('/profile')
+          })
+      }else if(response.currentpsrd) {
+        document.getElementById('pswrdvalidation').style.display='none'
+        document.getElementById('pswrderror').style.display='block'
+      }else if(response.validation){
+        document.getElementById('pswrderror').style.display='none'
+        document.getElementById('pswrdvalidation').style.display='block'
+      }else{
+        location.href=('/login')
+      }
+      
+     }
+  })
+})
+
+
+</script>

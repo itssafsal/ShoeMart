@@ -1,0 +1,84 @@
+
+ 
+{{> Navbar}}
+ <section class="gradient-custom" style="width: 100%;">
+  <div class=" py-5 h-100" >
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="">
+        <div class="card" style="border-radius: 10px;">
+          <div class="card-header px-4 py-5" style="background-color: rgba(255, 0, 0, 0.274);">
+            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #ff0000;">{{user.fname}}</span></h5>
+          </div>
+          {{#each orderList}}
+          <div class="card-body p-4" style="background-color: #d8d0d6;">
+          
+            <div class="card shadow-0 border mb-4">
+              <div class="card-body">
+                {{#each products}}
+                <div class="row">
+                  <div class="col-md-2">
+                    <img src="/product-images/{{this.products._id}}0.jpg"
+                      class="img-fluid" alt="Phone">
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0">{{this.products.Name}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">{{this.products.Category}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">{{../this.status}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">{{this.products.quantity}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">&#8377; {{this.products.Price}}</p>
+                  </div>
+                </div>
+                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                {{/each}}
+                <div class="row d-flex align-items-center">
+                
+                </div>
+              </div>
+            </div>
+            
+           
+
+            <div class="d-flex justify-content-between pt-2">
+              <p class="fw-bold mb-0">Order Details</p>
+              <p class="fw-bold mb-0">Address Details</p>
+            </div>
+
+
+            <div class="d-flex justify-content-between pt-2">
+              <p class="text-muted mb-0"><span class="fw-bold me-2">Invoice Number</span>: {{this.orderId}}</p>
+              <p class="text-muted mb-0">{{this.deliveryDetails.name}}</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <p class="text-muted mb-0"><span class="fw-bold me-2">Invoice Date</span>: {{this.date}}</p>
+              <p class="text-muted mb-0">{{this.deliveryDetails.House_Name}}, {{this.deliveryDetails.street}}</p>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+              <p class="text-muted mb-0"><span class="fw-bold me-2">Payment Method</span>: {{this.payment-method}}</p>
+              <p class="text-muted mb-0">{{this.deliveryDetails.City}}, {{this.deliveryDetails.state}}</p>  
+            </div>
+
+             <div class="d-flex justify-content-between">
+              <p class="text-muted mb-0"><span class="fw-bold me-2">Total</span>: {{this.totalAmount}}</p>
+              <p class="text-muted mb-0">{{this.deliveryDetails.pincode}}, {{this.deliveryDetails.mobile}}</p>
+            </div>
+            
+          </div>
+          <hr>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> footer}}

@@ -1,0 +1,28 @@
+{
+  "name": "Shopping Cart-2",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.18.3",
+    "express-fileupload": "^1.4.3",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "fs": "^0.0.1-security",
+    "hbs": "^4.2.0",
+    "http-errors": "~1.6.3",
+    "mongodb": "^6.4.0",
+    "morgan": "~1.9.1",
+    "nocache": "^4.0.0",
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.1.0",
+    "otp-generator": "^4.0.1",
+    "razorpay": "^2.9.2",
+    "sweetalert2": "^11.11.1"
+  }
+}
